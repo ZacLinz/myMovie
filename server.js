@@ -7,7 +7,8 @@ let http = require('http'),
 http.createServer((request, response) => {
     var addr = request.url,
       q = url.parse(addr, true),
-      filePath = '';
+      filePath = '',
+      timeStamp = new Date();
 
     if (q.pathname.includes('documentation')) {
       filePath = (__dirname + '/documentation.html');
@@ -20,7 +21,7 @@ http.createServer((request, response) => {
       }
       response.writeHead(200, { 'Content-Type': 'text/html' });
       response.write(data);
-      response.end();
+      response.end("Hello Node!");
   });
 
   fs.appendFile('log.txt', 'URL: ' + addr + '\nTimestamp: ' + timeStamp + '\n\n', function(err){
