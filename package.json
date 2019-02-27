@@ -1,0 +1,25 @@
+{
+  "name": "movie_api",
+  "version": "1.0.0",
+  "description": "An api all about movies",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "eslint": "^5.14.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZacLinz/myMovie.git"
+  },
+  "author": "Zachary Linzmeyer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZacLinz/myMovie/issues"
+  },
+  "homepage": "https://github.com/ZacLinz/myMovie#readme"
+}

@@ -1,0 +1,9 @@
+URL: /documentation.html
+Timestamp: Tue Feb 26 2019 13:30:25 GMT-0600 (DST)
+
+URL: /dist/css/styles.css
+Timestamp: Tue Feb 26 2019 13:30:25 GMT-0600 (DST)
+
+URL: /favicon.ico
+Timestamp: Tue Feb 26 2019 13:30:28 GMT-0600 (DST)
+
