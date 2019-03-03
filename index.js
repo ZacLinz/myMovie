@@ -3,16 +3,6 @@ const express = require('express'),
 
 const app = express();
 
-var logger = function (req, res, next){
-  console.log(req.url);
-  next();
-};
-
-var timeStamp = function (req, res, next){
-  console.log(Date.now());
-  next();
-}
-
 let topMovies =[{
   title: 'The Incredibles',
   director: 'Brad Bird'
@@ -50,21 +40,24 @@ let topMovies =[{
   director: 'Roger Allers'
 }];
 
-app.use(logger);
-app.use(timeStamp);
+app.use(morgan('common'));
+
 app.use(function(err, req, res, next){
   console.error(err.stack);
   res.status(500).send('All the pretty things are broken!')
 }),
-
+app.use(express.static('public'));
 app.get('/movies', function(req, res){
   res.json(topMovies)
 });
+app.get('/documentation', function(req, res){
+  res.sendFile('public/documentation.html', {root: __dirname})
+})
 app.get('/', function(req, res){
   res.send('Welcome to my favorite movie database!')
 });
 
-app.use(express.static('public'));
+
 
 app.listen(8080, ()=>
   console.log('App is listening on port 8080')
