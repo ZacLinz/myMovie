@@ -47,6 +47,7 @@ let users =[{
   email: 'sample@mail.com',
   birthday: 'mm/dd/yyyy'
 }]
+
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
@@ -62,8 +63,9 @@ app.get('/movies', function(req, res){
 });
 //endpoint 2
 app.get('/movies/:title', function(req, res){
-  res.json(topMovies.find((movie)=>
-    {return movie.title === req.params.title}))
+  res.json(topMovies.find((movie)=>{
+    return movie.title.toLowerCase() === req.params.title
+  }));
 });
 //endpoint 3 add semicolon to path later
 app.get('/movies/genre', function(req, res){
