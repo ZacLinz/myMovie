@@ -45,7 +45,7 @@ let users =[{
   userName: 'User_name',
   password: 'sample password',
   email: 'sample@mail.com',
-  birdthday: 'mm/dd/yyyy'
+  birthday: 'mm/dd/yyyy'
 }]
 app.use(morgan('common'));
 app.use(bodyParser.json());
