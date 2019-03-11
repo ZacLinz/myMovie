@@ -143,9 +143,10 @@ let backupDirectors =[{
 
 let users =[{
   userName: 'User_name',
-  password: 'sample password',
+  password: 'sample_password',
   email: 'sample@mail.com',
-  birthday: 'mm/dd/yyyy'
+  birthday: 'mm/dd/yyyy',
+  favoriteMovies: ['the incredibles']
 }]
 
 app.use(morgan('common'));
@@ -194,23 +195,58 @@ app.post('/users', function(req, res){
   users.push(newUser);
   res.send('new user succesfully added!');
 })
-//endpoint 6 I want to require the username and password but only able to change email/birthday
-app.put('/users/userName/password/email', function(req, res){
-  res.send('information succesfully updated!')
+
+app.get('/users', (req, res)=>{
+  res.json(users);
 })
 
+//endpoint 6
+app.put('/users/:userName/:password/:email/:birthday', function(req, res){
+  users.find((user) => {
+    if (user.userName === req.params.userName){
+      users.password = req.params.password;
+      users.email = req.params.email;
+      users.birthday = req.params.birthday;
+      res.status(201).send('information succesfully updated!')
+    }
+    else
+      res.status(404).send('unable to update information');
+    })
+  })
+
 //endpoint 7
-app.put('/users/userName/favorites/movie', function(req, res){
-  res.send('movie added to favorites')
+app.put('/users/:userName/favorites/:movie', function(req, res){
+  users.find((user) => {
+    if (user.userName === req.params.userName){
+      user.favoriteMovies.push(req.params.movie);
+      res.status(201).send('movie added to favorites')
+    }
+    else{
+      res.status(400).send('unable to add movie to favorites')
+    }
+  })
 })
 
 //endpoint 8
-app.delete('/users/userName/favorites/movie', function(req, res){
-  res.send('movie removed from favorites')
-})
+app.delete('/users/:userName/favorites/:movie', function(req, res){
+  let favorites = users.find((user)=>{return user.userName === req.params.userName})
+    if (favorites){
+      users.favoriteMovies.filter((obj) => {return obj.movie !== req.params.movie});
+      res.status(201).send('movie removed from favorites')
+    }
+    else {
+      res.status(401).send('unable to remove from favorites');
+    }
+  })
+
 //endpoint 9
-app.delete('/users/userName/password/deregister', function(req, res){
-  res.send('user succesfully deleted from app')
+app.delete('/users/:userName/:password/deregister', function(req, res){
+  users.find((user) => {
+    if (user.userName === req.params.userName || user.password === req.params.password){
+      users.filter((obj)=>{return obj.userName !== req.params.userName})
+      res.send('user successfully deleted from app')
+    }
+  })
 })
 
 app.get('/documentation', function(req, res){
