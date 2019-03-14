@@ -17,10 +17,10 @@
       <p>Will return all data on a single movie. The URL is /movies/[movie title] with [movie title] being the title searched for.
       This is a get request and the response will be a JSON object</p>
     <h1>Endpoint 3</h1>
-      <p>Will return a description of specific genres. The URL is /movies/[genre] with [genre] being a specific genre.
+      <p>Will return a description of specific genres. The URL is /movies/genre/[name] with [name] being a specific name of a genre.
       this is a get request and the response will be in text format</p>
     <h1>Endpoint 4</h1>
-      <p>Will return data about a director. The url is /movies/[director] with [director] being a specific director.
+      <p>Will return data about a director. The url is /directors/[name] with [name] being a specific director.
       This is a get request and the response will be in text format.</p>
     <h1>Endpoint 5</h1>
       <p>This will allow users to register on the the app. The URL is /users. The request body is a JSON object required to be in this format:<br>
@@ -30,8 +30,8 @@
       birthday: "mm/dd/yyyy"}<br>
       This is a post request and the response will be in text format confirming that they have registered</p>
     <h1>Endpoint 6</h1>
-      <p>This will allow users to update their email. The URL is /users/[userName]/[password]/[email] with [userName] and [password] being
-      being the users user name and password and [email] being the updated email. This is a PUT request and the response will be in text format
+      <p>This will allow users to update their email and birthday. The URL is /users/[userName]/[password]/[email]/[birthday] with [userName] and [password] being
+      being the users user name and password and [email] and [birthday] being the updated email and birthday respectively. This is a PUT request and the response will be in text format
       confirming that they have succesfully updated.</p>
     <h1>Endpoint 7</h1>
       <p>This will allow users to add a movie to their favorites list. The URL is /users/[userName]/favorites/[movie] with [userName] being the user name and [movie]
