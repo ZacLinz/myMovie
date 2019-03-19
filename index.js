@@ -15,142 +15,6 @@ mongoose.connect('mongodb://localhost:27017/myMovieDB', {useNewUrlParser: true})
 
 const app = express();
 
-let topMovies =[{
-  title: 'The Incredibles',
-  director:{
-    name: 'Brad Bird',
-    bio: 'https://www.imdb.com/name/nm0083348/bio',
-    birthYear: '1957',
-    deathYear: '',
-  },
-  genre: [' animation', ' action', ' adventure', ' family']
-},
-{
-  title: 'The Mummy',
-  director: {
-    name:'Alex Kurtzman',
-    bio:'https://www.imdb.com/name/nm0476064/',
-    birthYear: '1973',
-    deathYear: ''
-  },
-  genre: [' action', ' adventure']
-},
-{
-  title: 'Batman Begins',
-  director:{
-    name: 'Christopher Nolan',
-    bio: 'https://www.imdb.com/name/nm0634240/bio',
-    birthYear: '1970',
-    deathYear: ''
-  },
-  genre: [' super hero', ' action']
-},
-{
-  title: 'The Dark Knight',
-  director:{
-    name: 'Christopher Nolan',
-    bio: 'https://www.imdb.com/name/nm0634240/bio',
-    birthYear: '1970',
-    deathYear: ''
-  },
-  genre: [' super hero',  ' action']
-},
-{
-  title: 'The Dark Knight Rises',
-  director:{
-    name: 'Christopher Nolan',
-    bio: 'https://www.imdb.com/name/nm0634240/bio',
-    birthYear: '1970',
-    deathYear: ''
-  },
-  genre: [' super hero', ' action']
-},
-{
-  title: 'The Truman Show',
-  director:{
-    name: 'Peter Weir',
-    bio: 'https://www.imdb.com/name/nm0001837/bio',
-    birthYear: '1944',
-    deathYear: '',
-  },
-  genre: [ 'mystery', ' reality']
-},
-{
-  title: 'What We Do in the Shadows',
-  director: {
-    name:'Jemaine Clement',
-    bio: 'https://www.imdb.com/name/nm1318596/bio',
-    birthYear: '1974',
-    deathYear:''
-  },
-  genre: [' comedy', ' super natural']
-},
-{
-  title: 'Nausicaa of the Valley of the Wind',
-  director: {
-    name:'Hayao Miyazaki',
-    bio: 'https://www.imdb.com/name/nm0594503/bio',
-    birthYear: '1941',
-    deathYear: ''
-  },
-  genre:[' animation']
-},
-{
-  title: 'The Lion King',
-  director: {
-    name:'Roger Allers',
-    bio: 'https://www.imdb.com/name/nm0021249/bio',
-    birthYear: '1949',
-    deathYear: ''
-  },
-  genre: [' animation', ' musical', ' animal', ' family']
-}];
-
-
-let backupDirectors =[{
-  name: 'Brad Bird',
-  bio: 'https://www.imdb.com/name/nm0083348/bio',
-  birthYear: '1957',
-  deathYear: '',
-},
-{
-  name:'Alex Kurtzman',
-  bio:'https://www.imdb.com/name/nm0476064/',
-  birthYear: '1973',
-  deathYear: ''
-},
-{
-  name: 'Christopher Nolan',
-  bio: 'https://www.imdb.com/name/nm0634240/bio',
-  birthYear: '1970',
-  deathYear: ''
-},
-{
-  name: 'Peter Weir',
-  bio: 'https://www.imdb.com/name/nm0001837/bio',
-  birthYear: '1944',
-  deathYear: '',
-},
-{
-  name:'Jemaine Clement',
-  bio: 'https://www.imdb.com/name/nm1318596/bio',
-  birthYear: '1974',
-  deathYear:''
-},
-{
-  name:'Hayao Miyazaki',
-  bio: 'https://www.imdb.com/name/nm0594503/bio',
-  birthYear: '1941',
-  deathYear: ''
-},
-{
-  name:'Roger Allers',
-  bio: 'https://www.imdb.com/name/nm0021249/bio',
-  birthYear: '1949',
-  deathYear: ''
-}]
-
-
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
@@ -287,7 +151,7 @@ app.get('/users', (req, res)=>{
 //endpoint 7 add to a movie to a list of users favorties
 app.post('/users/:userName/favorites/:movieID', function(req, res){
   Users.findOneAndUpdate({userName: req.params.userName},{
-    $push: {favorites: req.params.MovieID}
+    $push: {favorites: req.params.movieID}
   },
   {new: true},
   function(err, updatedUser){
@@ -302,19 +166,19 @@ app.post('/users/:userName/favorites/:movieID', function(req, res){
 
 //endpoint 8 allow a user to remove a movie from their list of favorites
 app.delete('/users/:userName/favorites/:movieID', function(req, res){
-  Users.findOneAndRemove({favorites: req.params.movieID})
-  .then(function(movieID){
-    if (!movieID){
-      res.status(400).send(req.params.movieID + " was not found.");
-    }else {
-      res.status(200).send(req.params.movieID + " was removed from your favorites.");
+  Users.findOneAndUpdate({userName: req.params.userName},{
+    $pull:{favorites: req.params.movieID},
+  },
+  {new: true},
+  function(err, updatedUser){
+    if (err){
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    }else{
+      res.json(updatedUser)
     }
   })
-  .catch(function(err){
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-})
+});
 
 //endpoint 9 allows users to delete themselves
 app.delete('/users/:userName', function(req, res){
