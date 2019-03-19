@@ -30,19 +30,23 @@
       birthday: "mm/dd/yyyy"}<br>
       This is a post request and the response will be in text format confirming that they have registered</p>
     <h1>Endpoint 6</h1>
-      <p>This will allow users to update their email and birthday. The URL is /users/[userName]/[password]/[email]/[birthday] with [userName] and [password] being
-      being the users user name and password and [email] and [birthday] being the updated email and birthday respectively. This is a PUT request and the response will be in text format
+      <p>This will allow users to update their email and birthday. The URL is /users/[userName] with [userName] being the users user name. The request body is json object in this format:<br>
+        {userName: "User_name",<br>
+        password: "*********", <br>
+        email:"user@mail.com",<br>
+        birthday: "mm/dd/yyyy"}<br>
+        This is a PUT request and the response will be in text format
       confirming that they have succesfully updated.</p>
     <h1>Endpoint 7</h1>
       <p>This will allow users to add a movie to their favorites list. The URL is /users/[userName]/favorites/[movie] with [userName] being the user name and [movie]
-      being the movie to be added to the favorite list. This is a PUT request and the response will be in JSON format containing a list of all of the Users
+      being the movie's ID to be added to the favorite list. This is a PUT request and the response will be in JSON format containing a list of all of the Users
       favorite movies</p>
     <h1>Endpoint 8</h1>
       <p>This will allow users to remove a movie from their favorites list. The URL is /users/[userName]/favorites/[movie] with [userName] being the user name and
-      [movie] being the movie title to remove. This is DELETE request and the response will be in JSON format containing the updated favorites list.</p>
+      [movie] being the movie's ID to remove. This is DELETE request and the response will be in JSON format containing the updated favorites list.</p>
     <h1>Endpoint 9</h1>
-      <p>This will allow the users to deregister from the app. The URL is /users/[userName]/[password]/deregister with [userName] and [password] being the users
-      user name and password respectively. This is a DELETE request and the response will be a text message confirming that they have succesfully unregistered from
+      <p>This will allow the users to deregister from the app. The URL is /users/[userName] with [userName] users
+      user name. This is a DELETE request and the response will be a text message confirming that they have succesfully unregistered from
       the app.</p>
   </body>
 </html>
