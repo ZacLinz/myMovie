@@ -18,7 +18,7 @@ var userSchema = mongoose.Schema({
   password:{type: String, required: true},
   email:{type: String, required: true},
   birthday: Date,
-  favorites: [{type: mongoose.Schema.Types.ObjectId, ref:'Movies'}]
+  favorites: [{type: mongoose.Schema.Types.ObjectId, ref:'movies'}]
 });
 
 var directorSchema = mongoose.Schema({
