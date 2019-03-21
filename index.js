@@ -20,7 +20,8 @@ const Genres = Models.Genre;
 
 var auth = require('./auth.js')(app);
 
-mongoose.connect('mongodb://localhost:27017/myMovieDB', {useNewUrlParser: true});
+//mongoose.connect('mongodb://localhost:27017/myMovieDB', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://sovani:persona5@mymovie-j8mo3.mongodb.net/test?retryWrites=true', {useNewUrlParser: true});
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
