@@ -1,10 +1,13 @@
+
 const express = require('express'),
+  app = express(),
   morgan = require('morgan'),
   bodyParser = require('body-parser'),
   uuid = require('uuid'),
   mongoose = require('mongoose'),
-  passport = require('passport');
-  require('./passport.js');
+  passport = require('passport'),
+  passportjs = require('./passport.js');
+
 
 const Models = require('./models.js');
 const Movies = Models.Movie;
@@ -12,12 +15,9 @@ const Users = Models.User;
 const Directors = Models.Director;
 const Genres = Models.Genre;
 
-var auth = require('./auth.js');
+var auth = require('./auth.js')(app);
 
 mongoose.connect('mongodb://localhost:27017/myMovieDB', {useNewUrlParser: true});
-
-
-const app = express();
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
@@ -81,20 +81,20 @@ app.get('/directors/:name', passport.authenticate('jwt', {session: false}), func
 //endpoint 5 allow users to register
 /* json expected in this format
 ID : Integer,
-userName: String,
+username: String,
 password: String,
 email: String,
 birthday: stringn,
 */
 app.post('/users', function(req, res){
-  Users.findOne({userName : req.body.userName})
+  Users.findOne({username : req.body.username})
   .then(function(user){
     if (user){
-      return res.status(400).send(req.body.userName + "already exists");
+      return res.status(400).send(req.body.username + "already exists");
     } else{
       Users
       .create({
-        userName: req.body.userName,
+        username: req.body.username,
         password: req.body.password,
         email: req.body.email,
         birthday: req.body.birthday
@@ -120,10 +120,10 @@ app.post('/users', function(req, res){
   email: String, (required),
   birthday: Date
 }*/
-app.put('/users/:userName', passport.authenticate('jwt', {session: false}), function(req, res){
-  Users.update({userName: req.params.userName}, {$set:
+app.put('/users/:username', passport.authenticate('jwt', {session: false}), function(req, res){
+  Users.update({username: req.params.username}, {$set:
   {
-    userName: req.body.userName,
+    userName: req.body.username,
     password: req.body.password,
     email: req.body.email,
     birthday: req.body.birthday
@@ -153,8 +153,8 @@ app.get('/users', passport.authenticate('jwt', {session: false}), (req, res)=>{
 
 
 //endpoint 7 add to a movie to a list of users favorties
-app.post('/users/:userName/favorites/:movieID', passport.authenticate('jwt', {session: false}), function(req, res){
-  Users.findOneAndUpdate({userName: req.params.userName},{
+app.post('/users/:username/favorites/:movieID', passport.authenticate('jwt', {session: false}), function(req, res){
+  Users.findOneAndUpdate({username: req.params.username},{
     $push: {favorites: req.params.movieID}
   },
   {new: true},
@@ -169,8 +169,8 @@ app.post('/users/:userName/favorites/:movieID', passport.authenticate('jwt', {se
 });
 
 //endpoint 8 allow a user to remove a movie from their list of favorites
-app.delete('/users/:userName/favorites/:movieID', passport.authenticate('jwt', {session: false}), function(req, res){
-  Users.findOneAndUpdate({userName: req.params.userName},{
+app.delete('/users/:username/favorites/:movieID', passport.authenticate('jwt', {session: false}), function(req, res){
+  Users.findOneAndUpdate({username: req.params.username},{
     $pull:{favorites: req.params.movieID},
   },
   {new: true},
@@ -185,13 +185,13 @@ app.delete('/users/:userName/favorites/:movieID', passport.authenticate('jwt', {
 });
 
 //endpoint 9 allows users to delete themselves
-app.delete('/users/:userName', passport.authenticate('jwt', {session: false}), function(req, res){
-  Users.findOneAndRemove({userName: req.params.userName})
+app.delete('/users/:username', passport.authenticate('jwt', {session: false}), function(req, res){
+  Users.findOneAndRemove({username: req.params.username})
   .then(function(user){
     if (!user){
-      res.status(400).send(req.params.userName + " was not found.");
+      res.status(400).send(req.params.username + " was not found.");
     } else{
-      res.status(200).send(req.params.userName + " was deleted");
+      res.status(200).send(req.params.username + " was deleted");
     }
   })
   .catch(function(err){
@@ -207,7 +207,6 @@ app.get('/documentation', function(req, res){
 app.get('/', function(req, res){
   res.send('Welcome to my favorite movie database!')
 });
-
 
 
 app.listen(8080, ()=>
