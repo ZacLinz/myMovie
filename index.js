@@ -6,7 +6,10 @@ const express = require('express'),
   uuid = require('uuid'),
   mongoose = require('mongoose'),
   passport = require('passport'),
-  passportjs = require('./passport.js');
+  passportjs = require('./passport.js'),
+  cors = require('cors'),
+  validator = require('express-validator');
+
 
 
 const Models = require('./models.js');
@@ -21,6 +24,8 @@ mongoose.connect('mongodb://localhost:27017/myMovieDB', {useNewUrlParser: true})
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
+app.use(cors());
+app.use(validator());
 
 app.use(function(err, req, res, next){
   console.error(err.stack);
@@ -87,6 +92,20 @@ email: String,
 birthday: stringn,
 */
 app.post('/users', function(req, res){
+  //validation
+  req.checkBody('username', 'Username is required').notEmpty();
+  req.checkBody('username', 'username contains non alphanumeric characters.').isAlphanumeric();
+  req.checkBody('password', 'Password is required.').notEmpty();
+  req.checkBody('email', 'Email is required').notEmpty();
+  req.checkBody('email', 'Email does not appear to be valid.').isEmail();
+
+  var errors = req.validationErrors();
+
+  if (errors){
+    return res.status(422).json({errors: errors});
+  }
+
+  var hashedPassword = Users.hashPassword(req.body.password);
   Users.findOne({username : req.body.username})
   .then(function(user){
     if (user){
@@ -95,7 +114,7 @@ app.post('/users', function(req, res){
       Users
       .create({
         username: req.body.username,
-        password: req.body.password,
+        password: hashedPassword,
         email: req.body.email,
         birthday: req.body.birthday
       })
@@ -121,10 +140,11 @@ app.post('/users', function(req, res){
   birthday: Date
 }*/
 app.put('/users/:username', passport.authenticate('jwt', {session: false}), function(req, res){
+  var hashedPassword = Users.hashPassword(req.body.password)
   Users.update({username: req.params.username}, {$set:
   {
     userName: req.body.username,
-    password: req.body.password,
+    password: hashedPassword,
     email: req.body.email,
     birthday: req.body.birthday
   }},
@@ -208,7 +228,7 @@ app.get('/', function(req, res){
   res.send('Welcome to my favorite movie database!')
 });
 
-
-app.listen(8080, ()=>
-  console.log('App is listening on port 8080')
-);
+var port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function(){
+  console.log('App is listening on port 3000')
+});
