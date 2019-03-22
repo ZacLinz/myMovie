@@ -34,8 +34,10 @@ app.use(function(err, req, res, next){
 }),
 app.use(express.static('public'));
 
+//passport.authenticate('jwt', {session: false}),
+
 //endpoint 1 returns a list of all movies
-app.get('/movies', passport.authenticate('jwt', {session: false}), function(req, res){
+app.get('/movies', function(req, res){
   Movies.find()
   .then(function(movies){
     res.status(201).json(movies)
