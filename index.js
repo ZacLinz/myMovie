@@ -7,9 +7,10 @@ const express = require('express'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   passportjs = require('./passport.js'),
-  cors = require('cors'),
   validator = require('express-validator');
 
+const cors = require('cors');
+app.use(cors());
 
 
 const Models = require('./models.js');
@@ -25,7 +26,6 @@ mongoose.connect('mongodb+srv://myMovieAdmin:persona5@mymovie-j8mo3.mongodb.net/
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
-app.use(cors());
 app.use(validator());
 
 app.use(function(err, req, res, next){
