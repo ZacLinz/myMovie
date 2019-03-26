@@ -145,7 +145,7 @@ app.put('/users/:username', passport.authenticate('jwt', {session: false}), func
   var hashedPassword = Users.hashPassword(req.body.password)
   Users.update({username: req.params.username}, {$set:
   {
-    userName: req.body.username,
+    username: req.body.username,
     password: hashedPassword,
     email: req.body.email,
     birthday: req.body.birthday
