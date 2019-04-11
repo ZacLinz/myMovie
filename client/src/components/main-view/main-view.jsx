@@ -25,7 +25,7 @@ export class MainView extends React.Component{
   }*/
 
   componentDidMount(){
-    axios.get('<https://my-movie-108.herokuapp.com/movies>')
+    axios.get('my-movie-108.herokuapp.com/movies')
       .then(response => {
         //assign the result to the state
         this.setState({
