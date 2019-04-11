@@ -5,10 +5,10 @@ export class MovieCard extends React.Component {
     // this is given to <MovieCard/> component by the outer world
     // which in this case, is 'MainView', as 'MainView' is what is
     // connected to your database via the moviews endpoint
-    const { movie } = this.props;
+    const { movie, onClick } = this.props;
 
     return (
-      <div className="movie-card">{movie.title}</div>
+      <div onClick={()=> onClick(movie)} className="movie-card">{movie.title}</div>
     )
   }
 }
