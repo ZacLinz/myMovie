@@ -4,6 +4,8 @@
   "description": "An api all about movies",
   "main": "index.js",
   "dependencies": {
+    "@types/react": "^16.8.13",
+    "@types/react-dom": "^16.8.4",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.5",
     "bcryptjs": "^2.4.3",
