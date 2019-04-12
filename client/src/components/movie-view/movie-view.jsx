@@ -4,7 +4,7 @@ export class MovieView extends React.Component{
   constructor(){
     super();
 
-    this.state ={};
+    this.state={};
   }
   render(){
     const { movie } = this.prop;
