@@ -54,7 +54,7 @@ export class MainView extends React.Component{
       <div className="main-view">
       {selectedMovie
         ? <MovieView movie={selectedMovie}/>
-        : movie.map(movie =>(
+        : movies.map(movie =>(
           <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
         ))
       }
