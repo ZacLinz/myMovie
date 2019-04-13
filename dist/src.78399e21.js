@@ -27504,7 +27504,7 @@ function (_React$Component) {
   _createClass(MovieView, [{
     key: "render",
     value: function render() {
-      var movie = this.prop.movie;
+      var movie = this.props.movie;
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
@@ -27820,7 +27820,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62841" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61517" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
