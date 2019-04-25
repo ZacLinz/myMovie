@@ -32,3 +32,10 @@ export function RegistrationView(props) {
 </Form>
   );
 }
+
+/*RegistrationView.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+};*/
