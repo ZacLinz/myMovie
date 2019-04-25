@@ -61,9 +61,7 @@ export function LoginView(props) {
   );
 }
 
-/*LoginView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
-};*/
+LoginView.propTypes = {
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+};

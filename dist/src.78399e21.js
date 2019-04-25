@@ -29605,12 +29605,11 @@ function LoginView(props) {
     onClick: handleSubmit
   }, "Submit"));
 }
-/*LoginView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
-};*/
+
+LoginView.propTypes = {
+  username: _propTypes.default.string.isRequired,
+  password: _propTypes.default.string.isRequired
+};
 },{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js"}],"../../node_modules/react-bootstrap/utils/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 
@@ -30047,14 +30046,13 @@ function (_React$Component) {
 
   return MovieView;
 }(_react.default.Component);
-/*MovieView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string
-  }).isRequired,
-};*/
-
 
 exports.MovieView = MovieView;
+MovieView.propTypes = {
+  movie: _propTypes.default.shape({
+    title: _propTypes.default.string
+  }).isRequired
+};
 },{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/Row.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/Col.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -30342,7 +30340,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54128" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55020" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

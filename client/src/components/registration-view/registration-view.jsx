@@ -33,9 +33,7 @@ export function RegistrationView(props) {
   );
 }
 
-/*RegistrationView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
-};*/
+RegistrationView.propTypes = {
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+};
