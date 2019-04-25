@@ -1,5 +1,10 @@
+
+
 $color: steelblue;
 
-.my-movie{
-  color: $color;
+body{
+  background-color: $color;
+  font-family: 'roboto condensed', sans-serif;
+  font-size: 30px;
+  line-height: 32px;
 }

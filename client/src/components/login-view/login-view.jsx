@@ -30,6 +30,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import './login-view.scss'
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -54,7 +55,7 @@ export function LoginView(props) {
   </Form.Group>
   <Form.Group controlId="formBasicChecbox">
   </Form.Group>
-  <Button variant="primary" type="submit" onClick={handleSubmit}>
+  <Button className="submit" variant="primary" type="submit" onClick={handleSubmit}>
     Submit
   </Button>
 </Form>
