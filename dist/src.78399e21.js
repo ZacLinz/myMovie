@@ -30105,25 +30105,14 @@ function (_React$Component) {
 
     _classCallCheck(this, MainView);
 
-    // call the superclass constructor
-    // so that React can initialize it
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MainView).call(this)); //initialize the state to an empty object so we can destructure it later
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MainView).call(this));
     _this.state = {
       movies: null,
       selectedMovie: null,
       user: null
     };
     return _this;
-  } // this will override the render() method of the superclass
-  // don't need to call super() though
-
-  /*render(){
-    return (
-      <div className="main-view"></div>
-    );
-  }*/
-
+  }
 
   _createClass(MainView, [{
     key: "componentDidMount",
@@ -30158,8 +30147,6 @@ function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      // if the state isn't initialized, this will throw on runtime
-      // before the data is initially loaded
       var _this$state = this.state,
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
@@ -30168,8 +30155,7 @@ function (_React$Component) {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         }
-      }); // before the movies have been loaded
-
+      });
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
@@ -30356,7 +30342,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53315" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54128" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
