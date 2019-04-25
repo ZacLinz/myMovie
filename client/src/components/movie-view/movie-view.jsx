@@ -1,4 +1,8 @@
 import React from 'react';
+//import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export class MovieView extends React.Component{
   constructor(){
@@ -12,25 +16,26 @@ export class MovieView extends React.Component{
     if (!movie) return null;
 
     return(
-      <div className="movie-view">
-        <div className="movie-title">
-          <div className="label">Title</div>
-          <div className="value">{movie.title}</div>
-        </div>
-        <div className="movie-description">
-          <div className="label">Description</div>
-          <div className="value">{movie.description}</div>
-        </div>
-        <img className="movie-poster" src ={movie.ImagePath}></img>
-        <div className="movie-genre">
-          <div className="label">Genre</div>
-          <div className="value">{movie.genre.name}</div>
-        </div>
-        <div className="movie-director">
-          <div className="label">Director</div>
-          <div className="value">{movie.director.name}</div>
-        </div>
-      </div>
+      <Container className="movie-view">
+        <img className="movie-poster" src={movie.ImagePath}></img>
+        <Row className="movie-title">
+          <Col lg="2" className="label">Title: </Col>
+          <Col className="value">{movie.title}</Col>
+        </Row>
+        <Row className="movie-description">
+          <Col lg="2" className="label">Description: </Col>
+          <Col className="value">{movie.description}</Col>
+        </Row>
+
+        <Row className="movie-genre">
+          <Col lg="2" className="label">Genre: </Col>
+          <Col className="value">{movie.genre.name}</Col>
+        </Row>
+        <Row className="movie-director">
+          <Col lg="2" className="label">Director: </Col>
+          <Col className="value">{movie.director.name}</Col>
+        </Row>
+      </Container>
 
     );
   }
