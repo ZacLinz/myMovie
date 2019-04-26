@@ -30133,7 +30133,92 @@ MovieView.propTypes = {
     title: _propTypes.default.string
   }).isRequired
 };
-},{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/Row.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/Col.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/Row.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/Col.js"}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RegistrationView = RegistrationView;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function RegistrationView(props) {
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      setUsername = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    console.log(username, password);
+    props.onLoggedIn(username);
+  };
+
+  return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicUsername"
+  }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
+    type: "username",
+    value: username,
+    onChange: function onChange(e) {
+      return setUsername(e.target.value);
+    },
+    placeholder: "Enter username"
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Password"), _react.default.createElement(_Form.default.Control, {
+    type: "password",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    placeholder: "Password"
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Confirm Password"), _react.default.createElement(_Form.default.Control, {
+    type: "password",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    placeholder: "Re-enter Password"
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicChecbox"
+  }), _react.default.createElement(_Button.default, {
+    variant: "primary",
+    type: "submit",
+    onClick: handleSubmit
+  }, "Submit"));
+}
+
+RegistrationView.propTypes = {
+  username: _propTypes.default.string.isRequired,
+  password: _propTypes.default.string.isRequired
+};
+},{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30154,6 +30239,8 @@ var _loginView = require("../login-view/login-view");
 var _movieCard = require("../movie-card/movie-card");
 
 var _movieView = require("../movie-view/movie-view");
+
+var _registrationView = require("../registration-view/registration-view");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30257,15 +30344,14 @@ function (_React$Component) {
 
   return MainView;
 }(_react.default.Component);
-/*MainView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string
-  }).isRequired
-};*/
-
 
 exports.MainView = MainView;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../../node_modules/prop-types/index.js","./main-view.scss":"components/main-view/main-view.scss","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"index.scss":[function(require,module,exports) {
+MainView.propTypes = {
+  movie: _propTypes.default.shape({
+    title: _propTypes.default.string
+  }).isRequired
+};
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../../node_modules/prop-types/index.js","./main-view.scss":"components/main-view/main-view.scss","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -30355,7 +30441,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55321" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54870" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -24,6 +24,10 @@ export function RegistrationView(props) {
     <Form.Label>Password</Form.Label>
     <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
   </Form.Group>
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Confirm Password</Form.Label>
+    <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Re-enter Password" />
+  </Form.Group>
   <Form.Group controlId="formBasicChecbox">
   </Form.Group>
   <Button variant="primary" type="submit" onClick={handleSubmit}>
