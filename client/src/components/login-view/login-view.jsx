@@ -65,8 +65,3 @@ export function LoginView(props) {
 </Form>
   );
 }
-
-LoginView.propTypes = {
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired
-};

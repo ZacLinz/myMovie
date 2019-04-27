@@ -29953,11 +29953,6 @@ function LoginView(props) {
     onClick: handleSubmit
   }, "Submit"));
 }
-
-LoginView.propTypes = {
-  username: _propTypes.default.string.isRequired,
-  password: _propTypes.default.string.isRequired
-};
 },{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/Row.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/Col.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/Card.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -30248,11 +30243,6 @@ function RegistrationView(props) {
     onClick: handleSubmit
   }, "Submit"));
 }
-
-RegistrationView.propTypes = {
-  username: _propTypes.default.string.isRequired,
-  password: _propTypes.default.string.isRequired
-};
 },{"react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/Row.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/Col.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/Card.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -30393,11 +30383,6 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-MainView.propTypes = {
-  movie: _propTypes.default.shape({
-    title: _propTypes.default.string
-  }).isRequired
-};
 },{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../../node_modules/prop-types/index.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/Container.js","react-bootstrap/Row":"../../node_modules/react-bootstrap/Row.js","react-bootstrap/Col":"../../node_modules/react-bootstrap/Col.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/Card.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/Form.js","./main-view.scss":"components/main-view/main-view.scss","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -30488,7 +30473,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54233" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60185" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

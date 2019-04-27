@@ -41,8 +41,3 @@ export function RegistrationView(props) {
 </Form>
   );
 }
-
-RegistrationView.propTypes = {
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired
-};

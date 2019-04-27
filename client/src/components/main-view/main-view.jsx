@@ -70,9 +70,3 @@ export class MainView extends React.Component{
     )
   }
 }
-
-MainView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string
-  }).isRequired
-};
