@@ -1,10 +1,12 @@
-
-
 $color: steelblue;
+$colorButton: #33FF55;
 
-body{
-  background-color: $color;
+Form{
   font-family: 'roboto condensed', sans-serif;
   font-size: 30px;
   line-height: 32px;
+}
+
+.submit{
+  background-color: $colorButton;
 }
