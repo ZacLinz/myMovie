@@ -26,36 +26,6 @@ export class MainView extends React.Component{
   };
   }
 
-  componentDidMount(){
-    axios.get('https://my-movie-108.herokuapp.com/movies')
-      .then(response=>{
-        //assign the result to the state
-        this.setState({
-          movies: response.data
-        })
-      })
-      .catch(function(error){
-        console.log(error);
-      })
-  }
-
-  onMovieClick(movie){
-    this.setState({
-      selectedMovie: movie
-    })
-  }
-
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.username
-    });
-
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.username);
-    this.getMovies(authData.token)
-  }
-
   getMovies(token) {
     axios.get('https://my-movie-108.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}`}
@@ -70,12 +40,57 @@ export class MainView extends React.Component{
     });
   }
 
+
+
+  componentDidMount(){
+    window.addEventListener('hashchange', this.handleNewHash, false);
+    this.handleNewHash();
+
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+  }
+
+handleNewHash = () => {
+  const movieId = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
+
+  this.setState({
+    selectedMovieId: movieId[0]
+  });
+}
+
+  onMovieClick(movie){
+    window.location.hash = '#' + movie._id;
+    this.setState({
+      selectedMovie: movie._id
+    })
+  }
+
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.username
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.username);
+    this.getMovies(authData.token)
+  }
+
+
+
+
   render(){
     const { movies, selectedMovie, user } = this.state;
 
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-    if (!movies) return <div className="main-view"/>;
+    if (!movies || !movies.length) return <div className="main-view"/>;
+  const selectedMovie = selectedMovieId ? movies.find(m => m._id === selectedMovieId) : null;
 
     return(
       <div className="main-view">
