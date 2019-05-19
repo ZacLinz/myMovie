@@ -10,7 +10,7 @@ const express = require('express'),
   validator = require('express-validator');
 
 const cors = require('cors');
-var allowedOrigins = ['http://localhost:8080', 'http://localhost:3000']
+var allowedOrigins = ['*']
 app.use(cors({
   origin: function(origin, callback){
     if(!origin) return callback(null, true);
