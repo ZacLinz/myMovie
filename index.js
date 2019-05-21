@@ -231,6 +231,17 @@ app.delete('/users/:username', passport.authenticate('jwt', {session: false}), f
   });
 });
 
+app.get('/users/:username/favorites', passport.authenticate('jwt', {session: false}), function(req, res){
+  Users.find({username: req.params.username})
+  .then(function(favorites){
+    res.json(favorites)
+  })
+  .catch(function(err){
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  })
+});
+
 app.get('/documentation', function(req, res){
   res.sendFile('public/documentation.html', {root: __dirname})
 })
