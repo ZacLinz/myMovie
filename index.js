@@ -44,7 +44,33 @@ app.use(function(err, req, res, next){
 app.use(express.static('public'));
 
 
-//endpoint 1 returns a list of all movies
+/**
+*endpoint 1 returns a list of all movies
+*endpoint URL: /movies
+*GET request
+*no required params
+*example request:
+*@function getMovies(token) {
+*  axios
+*    .get("https://my-movie-108.herokuapp.com/movies", {
+*      headers: { Authorization: `Bearer ${token}` }
+*    })
+*    .then(response => {
+*      this.props.setMovies(response.data);
+*    })
+*    .catch(function(error) {
+*      console.log(error);
+*    });
+*}
+*example response:
+
+*@param {string} _id
+*@param {string}title
+*@param {string}description
+*@param {object} director
+*@param {object} genre
+*/
+
 app.get('/movies', passport.authenticate('jwt', {session: false}), function(req, res){
   Movies.find()
   .then(function(movies){
@@ -56,7 +82,7 @@ app.get('/movies', passport.authenticate('jwt', {session: false}), function(req,
   })
 });
 
-//endpoint 2 returns infomation about a single movie
+
 app.get('/movies/:title', passport.authenticate('jwt', {session: false}), function(req, res){
   Movies.findOne({title: req.params.title})
   .then(function(movie){
@@ -68,7 +94,6 @@ app.get('/movies/:title', passport.authenticate('jwt', {session: false}), functi
   })
 });
 
-//endpoint 3 return data about a genre
 app.get('/movies/genre/:name', passport.authenticate('jwt', {session: false}), function(req, res){
   Genres.find({name: req.params.name})
   .then(function(genre){
@@ -81,7 +106,6 @@ app.get('/movies/genre/:name', passport.authenticate('jwt', {session: false}), f
 });
 
 
-//endpoint 4 returns data about a director
 app.get('/directors/:name', passport.authenticate('jwt', {session: false}), function(req, res){
   Directors.find({name: req.params.name})
   .then(function(person){
@@ -93,14 +117,41 @@ app.get('/directors/:name', passport.authenticate('jwt', {session: false}), func
   })
 });
 
-
-//endpoint 5 allow users to register
-/* json expected in this format
-ID : Integer,
-username: String,
-password: String,
-email: String,
-birthday: stringn,
+/**
+*endpoint 2 allow users to register
+*endpoint URL: /users
+*POST request
+*params required:
+*@params {string} username
+*@params {string} password
+*@params {string} email
+*@params {date} birthday
+*@constant handleSubmit
+*example request:
+*@function handleSubmit = (e) => {
+*  e.preventDefault();
+*  axios.post('https://my-movie-108.herokuapp.com/users', {
+*      username: username,
+*      email: email,
+*      birthday: birthday,
+*      password: password,
+*      confirmPassword: confirmPassword
+*  })
+*  .then(response =>{
+*    const data = response.data;
+*    console.log(data);
+*    window.location.assign('/');
+*  })
+*  .catch(e => {
+*    console.log('error registering the user')
+*  });
+*}
+*example response:
+*@param {object} user
+*@params {string} username
+*@params {string} password
+*@params {string} email
+*@params {date} birthday
 */
 app.post('/users', function(req, res){
   //validation
@@ -142,14 +193,49 @@ app.post('/users', function(req, res){
   });
 
 
-//endpoint 6 allow users to update information by userName
-/*json like this:
-{
-  userName: String, (required),
-  password: String, (required),
-  email: String, (required),
-  birthday: Date
-}*/
+  /**
+  *endpoint 6 allow users to update information
+  *endpoint URL: /users/:username
+  *PUT request
+  *@params {string} username
+  *@params {string} password
+  *@params {string} email
+  *@params {date} birthday
+  *example request:
+  *@function handleUpdate(token) {
+  *  const { user } = this.props;
+  *  const { username, email, birthday, password, confirmPassword } = this.state;
+  *  axios({
+  *    method: "put",
+  *    url: `https://my-movie-108.herokuapp.com/users/${user.username}`,
+  *    headers: {
+  *      Authorization: `Bearer ${token}`
+  *    },
+  *    data: {
+  *      username: username,
+  *      email: email,
+  *      birthday: birthday,
+  *      password: password,
+  *      confirmPassword: confirmPassword
+  *    }
+  *  })
+  *    .then(response => {
+  *      //const data = response.data;
+  *      localStorage.removeItem("token");
+  *      localStorage.removeItem("user");
+  *      window.location.reload();
+  *    })
+  *    .catch(e => {
+  *      console.log("error updating the user");
+  *    });
+  *}
+  *example response:
+  *@param {object} user
+  *@params {string} username
+  *@params {string} password
+  *@params {string} email
+  *@params {date} birthday
+  */
 app.put('/users/:username', passport.authenticate('jwt', {session: false}), function(req, res){
   var hashedPassword = Users.hashPassword(req.body.password)
   Users.update({username: req.params.username}, {$set:
@@ -183,7 +269,36 @@ app.get('/users', passport.authenticate('jwt', {session: false}), (req, res)=>{
 
 
 
-//endpoint 7 add to a movie to a list of users favorties
+/**
+*endpoint 7 add a movie to users favorites
+*endpoint URL: /users/:username/favorites/:movieID
+*POST request
+*@params {ObjectId} _id
+*@params {string} user
+*@function addToFavorites() {
+*  const { movie} = this.props;
+*  const user = localStorage.getItem("user");
+*  const token = localStorage.getItem("token");
+*  console.log({ token });
+*  axios
+*    .post(
+*      `https://my-movie-108.herokuapp.com/users/${user}/favorites/${
+*        movie._id
+*      }`,
+*      null,
+*      { headers: { Authorization: `Bearer ${token}` } }
+*    )
+*    .then(res => {
+*      console.log(res);
+*      window.location.reload();
+*    })
+*    .catch(error => {
+*      console.log(error);
+*    });
+*}
+*example response:
+* Json of users updated list of favorites
+*/
 app.post('/users/:username/favorites/:movieID', passport.authenticate('jwt', {session: false}), function(req, res){
   Users.findOneAndUpdate({username: req.params.username},{
     $push: {favorites: req.params.movieID}
@@ -199,7 +314,32 @@ app.post('/users/:username/favorites/:movieID', passport.authenticate('jwt', {se
   })
 });
 
-//endpoint 8 allow a user to remove a movie from their list of favorites
+/**
+*endpoint 8 delete a movie from users list of favorites
+*endpoint URL: /users/:username/favorites/:movieID
+*DELETE request
+*@params {ObjectId} _id
+*@params {string} user
+*example request:
+removeFavorite(id, token) {
+  const { favorites } = this.props;
+  const { user } = this.props;
+  axios.delete(
+    `https://my-movie-108.herokuapp.com/users/${user.username}/favorites/${id}`,
+    {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => {
+      console.log(res);
+      window.location.reload();
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+*example response:
+* Json of users updated list of favorites
+*/
 app.delete('/users/:username/favorites/:movieID', passport.authenticate('jwt', {session: false}), function(req, res){
   Users.findOneAndUpdate({username: req.params.username},{
     $pull:{favorites: req.params.movieID},
@@ -215,7 +355,30 @@ app.delete('/users/:username/favorites/:movieID', passport.authenticate('jwt', {
   })
 });
 
-//endpoint 9 allows users to delete themselves
+/**
+*endpoint 9 delete a user
+*endpoint URL: /users/:username
+*DELETE request
+*@params {string} user
+*example request:
+*@function handleDelete(token) {
+*  const { user } = this.props;
+*  axios
+*    .delete(`https://my-movie-108.herokuapp.com/users/${user.username}`, {
+*      headers: { Authorization: `Bearer ${token}` }
+*    })
+*    .then(res => {
+*      localStorage.removeItem("token");
+*      localStorage.removeItem("user");
+*      window.location.reload();
+*    })
+*    .catch(error => {
+*      console.log(error);
+*    });
+*}
+*example response:
+* username was deleted
+*/
 app.delete('/users/:username', passport.authenticate('jwt', {session: false}), function(req, res){
   Users.findOneAndRemove({username: req.params.username})
   .then(function(user){
