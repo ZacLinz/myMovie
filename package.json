@@ -4,6 +4,12 @@
   "description": "An api all about movies",
   "main": "index.js",
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "@types/react": "^16.8.13",
+    "@types/react-dom": "^16.8.4",
+    "axios": "^0.18.1",
+>>>>>>> cd8d1bf28ed9de0927fecd182a70022dcf476498
     "bcrypt": "^3.0.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
@@ -17,13 +23,31 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+<<<<<<< HEAD
     "uuid": "^3.3.2"
   },
   "devDependencies": {},
+=======
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "^16.8.6",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "sass": "^1.26.11"
+  },
+>>>>>>> cd8d1bf28ed9de0927fecd182a70022dcf476498
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
+  "engines": {
+  "node": "10.12.0"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZacLinz/myMovie.git"

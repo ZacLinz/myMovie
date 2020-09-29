@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <head>
@@ -50,3 +51,57 @@
       the app.</p>
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="" rel="icon" />
+    <title>myMovie</title>
+    <link rel="stylesheet" type="text/css" href="dist/css/styles.css" />
+  </head>
+  <body>
+    <h1>myMovie</h1>
+    <p>This is a build in progress of a movie API. Users will eventually be able to use this app to receive
+      any information that a user might want about movies.</p>
+    <h1>Endpoint 1</h1>
+      <p>This endpoint will return a full list of movie titles and the URL is /movies. This is a get request will return a JSON object </p>
+    <h1>Endpoint 2</h1>
+      <p>Will return all data on a single movie. The URL is /movies/[movie title] with [movie title] being the title searched for.
+      This is a get request and the response will be a JSON object</p>
+    <h1>Endpoint 3</h1>
+      <p>Will return a description of specific genres. The URL is /movies/genre/[name] with [name] being a specific name of a genre.
+      this is a get request and the response will be in text format</p>
+    <h1>Endpoint 4</h1>
+      <p>Will return data about a director. The url is /directors/[name] with [name] being a specific director.
+      This is a get request and the response will be in text format.</p>
+    <h1>Endpoint 5</h1>
+      <p>This will allow users to register on the the app. The URL is /users. The request body is a JSON object required to be in this format:<br>
+      {userName: "User_name",<br>
+      password: "*********", <br>
+      email:"user@mail.com",<br>
+      birthday: "mm/dd/yyyy"}<br>
+      This is a post request and the response will be in text format confirming that they have registered</p>
+    <h1>Endpoint 6</h1>
+      <p>This will allow users to update their email and birthday. The URL is /users/[userName] with [userName] being the users user name. The request body is json object in this format:<br>
+        {userName: "User_name",<br>
+        password: "*********", <br>
+        email:"user@mail.com",<br>
+        birthday: "mm/dd/yyyy"}<br>
+        This is a PUT request and the response will be in text format
+      confirming that they have succesfully updated.</p>
+    <h1>Endpoint 7</h1>
+      <p>This will allow users to add a movie to their favorites list. The URL is /users/[userName]/favorites/[movie] with [userName] being the user name and [movie]
+      being the movie's ID to be added to the favorite list. This is a PUT request and the response will be in JSON format containing a list of all of the Users
+      favorite movies</p>
+    <h1>Endpoint 8</h1>
+      <p>This will allow users to remove a movie from their favorites list. The URL is /users/[userName]/favorites/[movie] with [userName] being the user name and
+      [movie] being the movie's ID to remove. This is DELETE request and the response will be in JSON format containing the updated favorites list.</p>
+    <h1>Endpoint 9</h1>
+      <p>This will allow the users to deregister from the app. The URL is /users/[userName] with [userName] users
+      user name. This is a DELETE request and the response will be a text message confirming that they have succesfully unregistered from
+      the app.</p>
+  </body>
+</html>
+>>>>>>> cd8d1bf28ed9de0927fecd182a70022dcf476498
