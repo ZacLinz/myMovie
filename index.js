@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 const express = require('express'),
   app = express(),
@@ -654,4 +654,3 @@ var port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function(){
   console.log('App is listening on port 3000')
 });
->>>>>>> cd8d1bf28ed9de0927fecd182a70022dcf476498
